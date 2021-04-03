@@ -1,3 +1,5 @@
+// github.com/jidicula/go-gamco provides an unofficial API wrapper for GAMCO's
+// Closed-End Funds API.
 // Copyright (C) 2021  Johanan Idicula
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Affero General Public License as published
