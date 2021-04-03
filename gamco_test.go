@@ -18,7 +18,10 @@ func TestGetData(t *testing.T) {
 
 		t.Run(name, func(t *testing.T) {
 
-			got := getData()
+			got, err := getData()
+			if err != nil {
+				t.Fatalf(err.Error())
+			}
 			if !tt.want.MatchString(got) {
 				t.Errorf("%s: got %s, want `%s` regex match", name, got, tt.want.String())
 			}
