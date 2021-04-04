@@ -99,3 +99,6 @@ type Fund struct {
 	LastMonthEnd         time.Time `json:"last_month_end"`
 	LastQtrEnd2          time.Time `json:"last_qtr_end_2"`
 }
+
+// A FundsMap represents a map of Fund objects with their symbols as keys.
+type FundsMap map[string]Fund
