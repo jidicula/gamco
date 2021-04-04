@@ -22,7 +22,7 @@ import (
 	"net/http"
 )
 
-// getData hits the nav_closed_ends endpoint.
+// getData hits the nav_closed_ends endpoint and stringifies the response.
 func getData() (string, error) {
 	url := "https://gabdotcom-api.com/api/v1/nav_closed_ends"
 	var bodyBytes []byte
