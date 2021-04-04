@@ -17,9 +17,11 @@
 package gamco
 
 import (
+	"encoding/json"
 	"fmt"
 	"io/ioutil"
 	"net/http"
+	"strings"
 	"time"
 )
 
@@ -98,6 +100,37 @@ type Fund struct {
 	Commentary           string    `json:"commentary"`
 	LastMonthEnd         time.Time `json:"last_month_end"`
 	LastQtrEnd2          time.Time `json:"last_qtr_end_2"`
+}
+
+// UnmarshalJSON unmarshals data into a Fund.
+func (f *Fund) UnmarshalJSON(data []byte) error {
+	var err error
+	type _fund Fund
+	var temp struct {
+		RawLastMonthEnd json.RawMessage `json:"last_month_end"`
+		RawLastQtrEnd2  json.RawMessage `json:"last_qtr_end_2"`
+		_fund
+	}
+	dateFormat := "01/02/2006"
+	if err = json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+
+	// unmarshal other fields
+	*f = Fund(temp._fund)
+
+	rawlastMonthEnd := strings.Trim(string(temp.RawLastMonthEnd), `"`)
+	f.LastMonthEnd, err = time.Parse(dateFormat, rawlastMonthEnd)
+	if err != nil {
+		return err
+	}
+
+	rawlastQtrEnd2 := strings.Trim(string(temp.RawLastQtrEnd2), `"`)
+	f.LastQtrEnd2, err = time.Parse(dateFormat, rawlastQtrEnd2)
+	if err != nil {
+		return err
+	}
+	return err
 }
 
 // A FundsMap represents a map of Fund objects with their symbols as keys.

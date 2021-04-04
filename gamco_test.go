@@ -46,7 +46,7 @@ func TestGetData(t *testing.T) {
 	}
 }
 
-func TestUnmarshal(t *testing.T) {
+func TestFundUnmarshal(t *testing.T) {
 	// Date setup
 	priceDate, err := time.Parse(time.RFC3339, "2021-04-01T00:00:00.000Z")
 	if err != nil {
