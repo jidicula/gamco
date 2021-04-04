@@ -20,6 +20,7 @@ import (
 	"fmt"
 	"io/ioutil"
 	"net/http"
+	"time"
 )
 
 // getData hits the nav_closed_ends endpoint and stringifies the response.
@@ -46,4 +47,55 @@ func getData() (string, error) {
 	bodyString = string(bodyBytes)
 
 	return bodyString, err
+}
+
+// A Fund represents a single closed-end GAMCO fund.
+type Fund struct {
+	ID                   int       `json:"id"`
+	FundCode             int       `json:"fund_code"`
+	SecurityID           string    `json:"security_id"`
+	FundShortName        string    `json:"fundshortname"`
+	NAVDate              time.Time `json:"pricedate"`
+	NAV                  string    `json:"price"`
+	PriorNAV             string    `json:"prior_price"`
+	Change               string    `json:"change"`
+	PctChange            string    `json:"pct_change"`
+	Sort                 string    `json:"sort"`
+	YtdReturn            float64   `json:"ytd_return"`
+	YtdReturnMonthly     float64   `json:"ytd_return_monthly"`
+	YtdReturnQuarterly   float64   `json:"ytd_return_quarterly"`
+	OneYrReturn          float64   `json:"one_yr_return"`
+	OneYrReturnMonthly   float64   `json:"one_yr_return_monthly"`
+	OneYrReturnQuarterly float64   `json:"one_yr_return_quarterly"`
+	ThreeYrAvg           float64   `json:"three_yr_avg"`
+	ThreeYrAvgMonthly    float64   `json:"three_yr_avg_monthly"`
+	ThreeYrAvgQuarterly  float64   `json:"three_yr_avg_quarterly"`
+	FiveYrAvg            float64   `json:"five_yr_avg"`
+	FiveYrAvgMonthly     float64   `json:"five_yr_avg_monthly"`
+	FiveYrAvgQuarterly   float64   `json:"five_yr_avg_quarterly"`
+	TenYrAvg             float64   `json:"ten_yr_avg"`
+	TenYrAvgMonthly      float64   `json:"ten_yr_avg_monthly"`
+	TenYrAvgQuarterly    float64   `json:"ten_yr_avg_quarterly"`
+	InceptAvg            float64   `json:"incept_avg"`
+	InceptAvgMonthly     float64   `json:"incept_avg_monthly"`
+	InceptAvgQuarterly   float64   `json:"incept_avg_quarterly"`
+	Symbol               string    `json:"symbol"`
+	AssetType            string    `json:"asset_type"`
+	InceptionDate        time.Time `json:"inception_date"`
+	LegalName2           string    `json:"legalname2"`
+	SeriesName           string    `json:"seriesname"`
+	DisplayName          string    `json:"displayname"`
+	DisplayName_         string    `json:"displayname_"`
+	Category             string    `json:"category"`
+	AnnualReport         string    `json:"annual_report"`
+	SemiAnnualReport     string    `json:"semi_annual_report"`
+	Cusip                string    `json:"cusip"`
+	QuarterlyReport      string    `json:"quarterly_report"`
+	Prospectus           string    `json:"prospectus"`
+	Sai                  string    `json:"sai"`
+	Soi                  string    `json:"soi"`
+	Factsheet            string    `json:"factsheet"`
+	Commentary           string    `json:"commentary"`
+	LastMonthEnd         time.Time `json:"last_month_end"`
+	LastQtrEnd2          time.Time `json:"last_qtr_end_2"`
 }
