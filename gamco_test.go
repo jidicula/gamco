@@ -41,7 +41,7 @@ func TestGetData(t *testing.T) {
 			if err != nil {
 				t.Fatalf(err.Error())
 			}
-			if !tt.want.MatchString(got) {
+			if !tt.want.MatchString(string(got)) {
 				t.Errorf("%s: got %s, want `%s` regex match", name, got, tt.want.String())
 			}
 		})
