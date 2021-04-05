@@ -1,3 +1,3 @@
 # go-gamco
 
-Practicing API consumption with GAMCO's Closed End Funds.
+Practicing API wrapping with GAMCO's Closed End Funds.
