@@ -1,3 +1,3 @@
 # go-gamco
 
-Unofficial wrapper for GAMCO's Closed End Funds API
+Practicing API consumption with GAMCO's Closed End Funds.
