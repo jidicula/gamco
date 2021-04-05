@@ -151,3 +151,9 @@ func (f *FundMap) UnmarshalJSON(data []byte) error {
 
 	return nil
 }
+
+// GetFund returns the symbol's matching Fund.
+func GetFund(symbol string) (Fund, error) {
+	f := Fund{}
+	return f, nil
+}

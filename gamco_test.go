@@ -338,3 +338,72 @@ func dateSetup(priceDate string, inceptionDate string, lastMonthEnd string, last
 
 	return dates, err
 }
+
+func TestGetStock(t *testing.T) {
+	tests := map[string]struct {
+		symbol string
+		want   Fund
+	}{
+		"GUT": {symbol: "GUT", want: Fund{
+			ID:                   0,
+			FundCode:             0,
+			SecurityID:           "",
+			FundShortName:        "",
+			NAVDate:              time.Time{},
+			NAV:                  "",
+			PriorNAV:             "",
+			Change:               "",
+			PctChange:            "",
+			Sort:                 "",
+			YtdReturn:            0,
+			YtdReturnMonthly:     0,
+			YtdReturnQuarterly:   0,
+			OneYrReturn:          0,
+			OneYrReturnMonthly:   0,
+			OneYrReturnQuarterly: 0,
+			ThreeYrAvg:           0,
+			ThreeYrAvgMonthly:    0,
+			ThreeYrAvgQuarterly:  0,
+			FiveYrAvg:            0,
+			FiveYrAvgMonthly:     0,
+			FiveYrAvgQuarterly:   0,
+			TenYrAvg:             0,
+			TenYrAvgMonthly:      0,
+			TenYrAvgQuarterly:    0,
+			InceptAvg:            0,
+			InceptAvgMonthly:     0,
+			InceptAvgQuarterly:   0,
+			Symbol:               "GUT",
+			AssetType:            "",
+			InceptionDate:        time.Time{},
+			LegalName2:           "",
+			SeriesName:           "",
+			DisplayName:          "",
+			DisplayName_:         "",
+			Category:             "",
+			AnnualReport:         "",
+			SemiAnnualReport:     "",
+			Cusip:                "",
+			QuarterlyReport:      "",
+			Prospectus:           "",
+			Sai:                  "",
+			Soi:                  "",
+			Factsheet:            "",
+			Commentary:           "",
+			LastMonthEnd:         time.Time{},
+			LastQtrEnd2:          time.Time{},
+		}},
+	}
+
+	for name, tt := range tests {
+		t.Run(name, func(t *testing.T) {
+			got, err := GetFund(tt.symbol)
+			if err != nil {
+				t.Fatalf(err.Error())
+			}
+			if got.Symbol != tt.want.Symbol {
+				t.Errorf("%s: got %v, want %v", name, got, tt.want)
+			}
+		})
+	}
+}
