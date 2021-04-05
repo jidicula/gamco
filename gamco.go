@@ -133,5 +133,10 @@ func (f *Fund) UnmarshalJSON(data []byte) error {
 	return err
 }
 
-// A FundsMap represents a map of Fund objects with their symbols as keys.
-type FundsMap map[string]Fund
+// A FundMap represents a map of Fund objects with their symbols as keys.
+type FundMap map[string]Fund
+
+// UnmarshalJSON unmarshals JSON data into a FundMap
+func (f *FundMap) UnmarshalJSON(data []byte) error {
+	return nil
+}
