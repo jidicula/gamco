@@ -48,19 +48,14 @@ func TestGetData(t *testing.T) {
 
 func TestFundUnmarshal(t *testing.T) {
 	// Date setup
-	priceDate, err := time.Parse(time.RFC3339, "2021-04-01T00:00:00.000Z")
+	dates, err := dateSetup("2021-04-01T00:00:00.000Z", "1999-07-09T00:00:00.000Z", "03/31/2021", "03/31/2021")
 	if err != nil {
 		t.Fatalf(err.Error())
 	}
-	inceptionDate, err := time.Parse(time.RFC3339, "1999-07-09T00:00:00.000Z")
-	if err != nil {
-		t.Fatalf(err.Error())
-	}
-	lastMonthEnd, err := time.Parse("01/02/2006", "03/31/2021")
-	if err != nil {
-		t.Fatalf(err.Error())
-	}
-	lastQtrEnd := lastMonthEnd
+	priceDate := dates["priceDate"]
+	inceptionDate := dates["inceptionDate"]
+	lastMonthEnd := dates["lastMonthEnd"]
+	lastQtrEnd := dates["lastQtrEnd"]
 
 	tests := map[string]struct {
 		data []byte
@@ -178,4 +173,29 @@ func TestFundUnmarshal(t *testing.T) {
 		})
 	}
 
+}
+
+// dateSetup sets up a map of times for use in tests
+func dateSetup(priceDate string, inceptionDate string, lastMonthEnd string, lastQtrEnd string) (map[string]time.Time, error) {
+	dates := make(map[string]time.Time)
+	dateFormat := "01/02/2006"
+	var err error
+	dates["priceDate"], err = time.Parse(time.RFC3339, priceDate)
+	if err != nil {
+		return dates, err
+	}
+	dates["inceptionDate"], err = time.Parse(time.RFC3339, inceptionDate)
+	if err != nil {
+		return dates, err
+	}
+	dates["lastMonthEnd"], err = time.Parse(dateFormat, lastMonthEnd)
+	if err != nil {
+		return dates, err
+	}
+	dates["lastQtrEnd"], err = time.Parse(dateFormat, lastQtrEnd)
+	if err != nil {
+		return dates, err
+	}
+
+	return dates, err
 }
