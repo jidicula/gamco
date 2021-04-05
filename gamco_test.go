@@ -16,8 +16,10 @@ package gamco
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"regexp"
+	"strings"
 	"testing"
 	"time"
 )
@@ -175,6 +177,141 @@ func TestFundUnmarshal(t *testing.T) {
 		})
 	}
 
+}
+
+func TestFundMapUnmarshal(t *testing.T) {
+	// Date setup
+	dates, err := dateSetup("2021-04-01T00:00:00.000Z", "1999-07-09T00:00:00.000Z", "03/31/2021", "03/31/2021")
+	if err != nil {
+		t.Fatalf(err.Error())
+	}
+	priceDate := dates["priceDate"]
+	inceptionDate := dates["inceptionDate"]
+	lastMonthEnd := dates["lastMonthEnd"]
+	lastQtrEnd := dates["lastQtrEnd"]
+
+	testGGT := strings.ReplaceAll(testGUT, "GUT", "GGT")
+
+	data := fmt.Sprintf("[%s,\n%s]", testGUT, testGGT)
+
+	tests := map[string]struct {
+		data []byte
+		want FundMap
+	}{
+		"two funds": {
+			data: []byte(data),
+			want: FundMap{"GUT": Fund{
+				ID:                   515,
+				FundCode:             -113,
+				SecurityID:           "36240A101",
+				FundShortName:        "Utility Trust",
+				NAVDate:              priceDate,
+				NAV:                  "4.27",
+				PriorNAV:             "4.25",
+				Change:               "0.02",
+				PctChange:            "0.004706",
+				Sort:                 "43.0",
+				YtdReturn:            0.0767238547,
+				YtdReturnMonthly:     0.0716806516,
+				YtdReturnQuarterly:   0.0716806516,
+				OneYrReturn:          0.3799871231,
+				OneYrReturnMonthly:   0.2908244253,
+				OneYrReturnQuarterly: 0.2908244253,
+				ThreeYrAvg:           0.0821346464,
+				ThreeYrAvgMonthly:    0.0806954728,
+				ThreeYrAvgQuarterly:  0.0806954728,
+				FiveYrAvg:            0.0628642424,
+				FiveYrAvgMonthly:     0.0618578521,
+				FiveYrAvgQuarterly:   0.0618578521,
+				TenYrAvg:             0.0852284004,
+				TenYrAvgMonthly:      0.086077124,
+				TenYrAvgQuarterly:    0.086077124,
+				InceptAvg:            0.0851655141,
+				InceptAvgMonthly:     0.085533555,
+				InceptAvgQuarterly:   0.0869319686,
+				Symbol:               "GUT",
+				AssetType:            "Equity",
+				InceptionDate:        inceptionDate,
+				LegalName2:           "The Gabelli Utility Trust",
+				SeriesName:           "",
+				DisplayName:          "Gabelli Utility Trust",
+				DisplayName_:         "The Gabelli Utility Trust",
+				Category:             "value",
+				AnnualReport:         "https://gab-annual-reports.s3.us-east-2.amazonaws.com/GUTFundWebReady12312020.pdf",
+				SemiAnnualReport:     "https://gab-semi-annuals.s3.us-east-2.amazonaws.com/TheGabelliUtilityTrust606302020.pdf",
+				Cusip:                "36240A101",
+				QuarterlyReport:      "https://gab-reports.s3.us-east-2.amazonaws.com/2006q3/-113.pdf",
+				Prospectus:           "https://gab-prospectus.s3.us-east-2.amazonaws.com/-113.pdf",
+				Sai:                  "https://gab-sai.s3.us-east-2.amazonaws.com/-113_sai.pdf",
+				Soi:                  "",
+				Factsheet:            "https://gab-factsheets.s3.us-east-2.amazonaws.com/closedEnd_FactSheets4Q2020DRAFT_GUT12312020.pdf",
+				Commentary:           "https://gab-commentary-pdf.s3.us-east-2.amazonaws.com/WEB_CEF_4Q2012312020.pdf",
+				LastMonthEnd:         lastMonthEnd,
+				LastQtrEnd2:          lastQtrEnd,
+			}, "GGT": Fund{
+				ID:                   515,
+				FundCode:             -113,
+				SecurityID:           "36240A101",
+				FundShortName:        "Utility Trust",
+				NAVDate:              priceDate,
+				NAV:                  "4.27",
+				PriorNAV:             "4.25",
+				Change:               "0.02",
+				PctChange:            "0.004706",
+				Sort:                 "43.0",
+				YtdReturn:            0.0767238547,
+				YtdReturnMonthly:     0.0716806516,
+				YtdReturnQuarterly:   0.0716806516,
+				OneYrReturn:          0.3799871231,
+				OneYrReturnMonthly:   0.2908244253,
+				OneYrReturnQuarterly: 0.2908244253,
+				ThreeYrAvg:           0.0821346464,
+				ThreeYrAvgMonthly:    0.0806954728,
+				ThreeYrAvgQuarterly:  0.0806954728,
+				FiveYrAvg:            0.0628642424,
+				FiveYrAvgMonthly:     0.0618578521,
+				FiveYrAvgQuarterly:   0.0618578521,
+				TenYrAvg:             0.0852284004,
+				TenYrAvgMonthly:      0.086077124,
+				TenYrAvgQuarterly:    0.086077124,
+				InceptAvg:            0.0851655141,
+				InceptAvgMonthly:     0.085533555,
+				InceptAvgQuarterly:   0.0869319686,
+				Symbol:               "GGT",
+				AssetType:            "Equity",
+				InceptionDate:        inceptionDate,
+				LegalName2:           "The Gabelli Utility Trust",
+				SeriesName:           "",
+				DisplayName:          "Gabelli Utility Trust",
+				DisplayName_:         "The Gabelli Utility Trust",
+				Category:             "value",
+				AnnualReport:         "https://gab-annual-reports.s3.us-east-2.amazonaws.com/GGTFundWebReady12312020.pdf",
+				SemiAnnualReport:     "https://gab-semi-annuals.s3.us-east-2.amazonaws.com/TheGabelliUtilityTrust606302020.pdf",
+				Cusip:                "36240A101",
+				QuarterlyReport:      "https://gab-reports.s3.us-east-2.amazonaws.com/2006q3/-113.pdf",
+				Prospectus:           "https://gab-prospectus.s3.us-east-2.amazonaws.com/-113.pdf",
+				Sai:                  "https://gab-sai.s3.us-east-2.amazonaws.com/-113_sai.pdf",
+				Soi:                  "",
+				Factsheet:            "https://gab-factsheets.s3.us-east-2.amazonaws.com/closedEnd_FactSheets4Q2020DRAFT_GGT12312020.pdf",
+				Commentary:           "https://gab-commentary-pdf.s3.us-east-2.amazonaws.com/WEB_CEF_4Q2012312020.pdf",
+				LastMonthEnd:         lastMonthEnd,
+				LastQtrEnd2:          lastQtrEnd,
+			}},
+		},
+	}
+
+	for name, tt := range tests {
+		t.Run(name, func(t *testing.T) {
+			got := FundMap{}
+			err := json.Unmarshal(tt.data, &got)
+			if err != nil {
+				t.Fatalf(err.Error())
+			}
+			if !reflect.DeepEqual(got, tt.want) {
+				t.Errorf("%s: got %v, want %v", name, got, tt.want)
+			}
+		})
+	}
 }
 
 // dateSetup sets up a map of times for use in tests
