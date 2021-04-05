@@ -46,22 +46,7 @@ func TestGetData(t *testing.T) {
 	}
 }
 
-func TestFundUnmarshal(t *testing.T) {
-	// Date setup
-	dates, err := dateSetup("2021-04-01T00:00:00.000Z", "1999-07-09T00:00:00.000Z", "03/31/2021", "03/31/2021")
-	if err != nil {
-		t.Fatalf(err.Error())
-	}
-	priceDate := dates["priceDate"]
-	inceptionDate := dates["inceptionDate"]
-	lastMonthEnd := dates["lastMonthEnd"]
-	lastQtrEnd := dates["lastQtrEnd"]
-
-	tests := map[string]struct {
-		data []byte
-		want Fund
-	}{
-		"fund": {data: []byte(`{
+var testGUT = `{
     "id": 515,
     "fund_code": -113,
     "security_id": "36240A101",
@@ -109,7 +94,24 @@ func TestFundUnmarshal(t *testing.T) {
     "commentary": "https://gab-commentary-pdf.s3.us-east-2.amazonaws.com/WEB_CEF_4Q2012312020.pdf",
     "last_month_end": "03/31/2021",
     "last_qtr_end_2": "03/31/2021"
-  }`), want: Fund{
+  }`
+
+func TestFundUnmarshal(t *testing.T) {
+	// Date setup
+	dates, err := dateSetup("2021-04-01T00:00:00.000Z", "1999-07-09T00:00:00.000Z", "03/31/2021", "03/31/2021")
+	if err != nil {
+		t.Fatalf(err.Error())
+	}
+	priceDate := dates["priceDate"]
+	inceptionDate := dates["inceptionDate"]
+	lastMonthEnd := dates["lastMonthEnd"]
+	lastQtrEnd := dates["lastQtrEnd"]
+
+	tests := map[string]struct {
+		data []byte
+		want Fund
+	}{
+		"fund": {data: []byte(testGUT), want: Fund{
 			ID:                   515,
 			FundCode:             -113,
 			SecurityID:           "36240A101",
