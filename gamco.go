@@ -138,5 +138,16 @@ type FundMap map[string]Fund
 
 // UnmarshalJSON unmarshals JSON data into a FundMap
 func (f *FundMap) UnmarshalJSON(data []byte) error {
+	*f = make(FundMap)
+
+	var fundList []*Fund
+	if err := json.Unmarshal(data, &fundList); err != nil {
+		return err
+	}
+
+	for _, v := range fundList {
+		(*f)[v.Symbol] = *v
+	}
+
 	return nil
 }
