@@ -100,58 +100,5 @@ type Fund struct {
 	LastQtrEnd2          time.Time `json:"last_qtr_end_2"`
 }
 
-// Equals checks if another Fund has equal fields to the receiver Fund.
-func (f *Fund) Equals(otherFund *Fund) bool {
-	IdEq := f.ID == otherFund.ID
-	FundCodeEq := f.FundCode == otherFund.FundCode
-	SecurityIdEq := f.SecurityID == otherFund.SecurityID
-	FundShortNameEq := f.FundShortName == otherFund.FundShortName
-	NavDateEq := f.NAVDate == otherFund.NAVDate
-	NavEq := f.NAV == otherFund.NAV
-	PriorNavEq := f.PriorNAV == otherFund.PriorNAV
-	ChangeEq := f.Change == otherFund.Change
-	PctChangeEq := f.PctChange == otherFund.PctChange
-	SortEq := f.Sort == otherFund.Sort
-	YtdReturnEq := f.YtdReturn == otherFund.YtdReturn
-	YtdReturnMonthlyEq := f.YtdReturnMonthly == otherFund.YtdReturnMonthly
-	YtdReturnQuarterlyEq := f.YtdReturnQuarterly == otherFund.YtdReturnQuarterly
-	OneYrReturnEq := f.OneYrReturn == otherFund.OneYrReturn
-	OneYrReturnMonthlyEq := f.OneYrReturnMonthly == otherFund.OneYrReturnMonthly
-	OneYrReturnQuarterlyEq := f.OneYrReturnQuarterly == otherFund.OneYrReturnQuarterly
-	ThreeYrAvgEq := f.ThreeYrAvg == otherFund.ThreeYrAvg
-	ThreeYrAvgMonthlyEq := f.ThreeYrAvgMonthly == otherFund.ThreeYrAvgMonthly
-	ThreeYrAvgQuarterlyEq := f.ThreeYrAvgQuarterly == otherFund.ThreeYrAvgQuarterly
-	FiveYrAvgEq := f.FiveYrAvg == otherFund.FiveYrAvg
-	FiveYrAvgMonthlyEq := f.FiveYrAvgMonthly == otherFund.FiveYrAvgMonthly
-	FiveYrAvgQuarterlyEq := f.FiveYrAvgQuarterly == otherFund.FiveYrAvgQuarterly
-	TenYrAvgEq := f.TenYrAvg == otherFund.TenYrAvg
-	TenYrAvgMonthlyEq := f.TenYrAvgMonthly == otherFund.TenYrAvgMonthly
-	TenYrAvgQuarterlyEq := f.TenYrAvgQuarterly == otherFund.TenYrAvgQuarterly
-	InceptAvgEq := f.InceptAvg == otherFund.InceptAvg
-	InceptAvgMonthlyEq := f.InceptAvgMonthly == otherFund.InceptAvgMonthly
-	InceptAvgQuarterlyEq := f.InceptAvgQuarterly == otherFund.InceptAvgQuarterly
-	SymbolEq := f.Symbol == otherFund.Symbol
-	AssetTypeEq := f.AssetType == otherFund.AssetType
-	InceptionDateEq := f.InceptionDate == otherFund.InceptionDate
-	LegalName2Eq := f.LegalName2 == otherFund.LegalName2
-	SeriesNameEq := f.SeriesName == otherFund.SeriesName
-	DisplayNameEq := f.DisplayName == otherFund.DisplayName
-	DisplayName_Eq := f.DisplayName_ == otherFund.DisplayName_
-	CategoryEq := f.Category == otherFund.Category
-	AnnualReportEq := f.AnnualReport == otherFund.AnnualReport
-	SemiAnnualReportEq := f.SemiAnnualReport == otherFund.SemiAnnualReport
-	CusipEq := f.Cusip == otherFund.Cusip
-	QuarterlyReportEq := f.QuarterlyReport == otherFund.QuarterlyReport
-	ProspectusEq := f.Prospectus == otherFund.Prospectus
-	SaiEq := f.Sai == otherFund.Sai
-	SoiEq := f.Soi == otherFund.Soi
-	FactsheetEq := f.Factsheet == otherFund.Factsheet
-	CommentaryEq := f.Commentary == otherFund.Commentary
-	LastMonthEndEq := f.LastMonthEnd == otherFund.LastMonthEnd
-	LastQtrEnd2Eq := f.LastQtrEnd2 == otherFund.LastQtrEnd2
-
-	return (ChangeEq && PctChangeEq && FundCodeEq && SecurityIdEq && FundShortNameEq && NavDateEq && NavEq && PriorNavEq && SortEq && YtdReturnEq && YtdReturnMonthlyEq && YtdReturnQuarterlyEq && OneYrReturnEq && OneYrReturnMonthlyEq && LastQtrEnd2Eq && LastMonthEndEq && CommentaryEq && FactsheetEq && SoiEq && SaiEq && ProspectusEq && QuarterlyReportEq && CusipEq && SemiAnnualReportEq && AnnualReportEq && CategoryEq && DisplayName_Eq && DisplayNameEq && SeriesNameEq && LegalName2Eq && InceptionDateEq && AssetTypeEq && SymbolEq && InceptAvgQuarterlyEq && InceptAvgMonthlyEq && InceptAvgEq && TenYrAvgQuarterlyEq && TenYrAvgMonthlyEq && TenYrAvgEq && FiveYrAvgQuarterlyEq && FiveYrAvgMonthlyEq && FiveYrAvgEq && ThreeYrAvgQuarterlyEq && ThreeYrAvgMonthlyEq && ThreeYrAvgEq && OneYrReturnQuarterlyEq && IdEq)
-}
-
 // A FundsMap represents a map of Fund objects with their symbols as keys.
 type FundsMap map[string]Fund

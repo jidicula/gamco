@@ -16,6 +16,7 @@ package gamco
 
 import (
 	"encoding/json"
+	"reflect"
 	"regexp"
 	"testing"
 	"time"
@@ -171,7 +172,7 @@ func TestUnmarshal(t *testing.T) {
 			if err != nil {
 				t.Fatalf(err.Error())
 			}
-			if !(got.Equals(&tt.want)) {
+			if !reflect.DeepEqual(got, tt.want) {
 				t.Errorf("%s: got %v, want %v", name, got, tt.want)
 			}
 		})
