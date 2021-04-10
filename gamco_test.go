@@ -407,3 +407,17 @@ func TestGetFund(t *testing.T) {
 		})
 	}
 }
+
+func TestGetFundList(t *testing.T) {
+	wantLength := 53
+	name := "Test response list length"
+	t.Run(name, func(t *testing.T) {
+		got, err := GetFundList()
+		if err != nil {
+			t.Fatalf(err.Error())
+		}
+		if flLen := len(got); flLen != wantLength {
+			t.Errorf("%s: got list with %v Funds, want list with %v Funds", name, flLen, wantLength)
+		}
+	})
+}

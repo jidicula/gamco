@@ -174,3 +174,20 @@ func GetFund(symbol string) (Fund, error) {
 
 	return f, nil
 }
+
+// GetFundList returns a list of Funds.
+func GetFundList() ([]Fund, error) {
+	fl := []Fund{}
+
+	d, err := getData()
+	if err != nil {
+		return fl, err
+	}
+
+	err = json.Unmarshal(d, &fl)
+	if err != nil {
+		return fl, err
+	}
+
+	return fl, nil
+}
