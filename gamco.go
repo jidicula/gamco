@@ -192,7 +192,7 @@ func GetCommonFundList() ([]Fund, error) {
 	// filter only common stock
 	flCommon := []Fund{}
 	for _, v := range fl {
-		if v.AnnualReport != "" {
+		if v.AnnualReport != "" && len(v.Symbol) == 3 {
 			flCommon = append(flCommon, v)
 		}
 	}
