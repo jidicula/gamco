@@ -175,8 +175,8 @@ func GetFund(symbol string) (Fund, error) {
 	return f, nil
 }
 
-// GetFundList returns a list of Funds.
-func GetFundList() ([]Fund, error) {
+// GetCommonFundList returns a list of common GAMCO Funds.
+func GetCommonFundList() ([]Fund, error) {
 	fl := []Fund{}
 
 	d, err := getData()
@@ -189,5 +189,13 @@ func GetFundList() ([]Fund, error) {
 		return fl, err
 	}
 
-	return fl, nil
+	// filter only common stock
+	flCommon := []Fund{}
+	for _, v := range fl {
+		if v.AnnualReport != "" {
+			flCommon = append(flCommon, v)
+		}
+	}
+
+	return flCommon, nil
 }

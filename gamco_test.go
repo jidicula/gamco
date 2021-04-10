@@ -409,10 +409,10 @@ func TestGetFund(t *testing.T) {
 }
 
 func TestGetFundList(t *testing.T) {
-	wantLength := 53
+	wantLength := 15
 	name := "Test response list length"
 	t.Run(name, func(t *testing.T) {
-		got, err := GetFundList()
+		got, err := GetCommonFundList()
 		if err != nil {
 			t.Fatalf(err.Error())
 		}
