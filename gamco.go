@@ -167,7 +167,35 @@ func GetFund(symbol string) (Fund, error) {
 		return f, err
 	}
 
-	f = fm[symbol]
+	f, ok := fm[symbol]
+	if !ok {
+		return f, fmt.Errorf("Fund for symbol %s not found", symbol)
+	}
 
 	return f, nil
+}
+
+// GetCommonFundList returns a list of common GAMCO Funds.
+func GetCommonFundList() ([]Fund, error) {
+	fl := []Fund{}
+
+	d, err := getData()
+	if err != nil {
+		return fl, err
+	}
+
+	err = json.Unmarshal(d, &fl)
+	if err != nil {
+		return fl, err
+	}
+
+	// filter only common stock
+	flCommon := []Fund{}
+	for _, v := range fl {
+		if v.AnnualReport != "" {
+			flCommon = append(flCommon, v)
+		}
+	}
+
+	return flCommon, nil
 }
