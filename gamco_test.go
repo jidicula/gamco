@@ -339,7 +339,7 @@ func dateSetup(priceDate string, inceptionDate string, lastMonthEnd string, last
 	return dates, err
 }
 
-func TestGetStock(t *testing.T) {
+func TestGetFund(t *testing.T) {
 	tests := map[string]struct {
 		symbol string
 		want   Fund
