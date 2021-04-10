@@ -167,7 +167,10 @@ func GetFund(symbol string) (Fund, error) {
 		return f, err
 	}
 
-	f = fm[symbol]
+	f, ok := fm[symbol]
+	if !ok {
+		return f, fmt.Errorf("Fund for symbol %s not found", symbol)
+	}
 
 	return f, nil
 }
