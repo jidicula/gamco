@@ -1,3 +1,5 @@
+[![Build](https://github.com/jidicula/go-gamco/actions/workflows/build.yml/badge.svg)](https://github.com/jidicula/go-gamco/actions/workflows/build.yml) [![Latest Release](https://github.com/jidicula/go-gamco/actions/workflows/release-draft.yml/badge.svg)](https://github.com/jidicula/go-gamco/actions/workflows/release-draft.yml) [![Go Report Card](https://goreportcard.com/badge/github.com/jidicula/go-gamco)](https://goreportcard.com/report/github.com/jidicula/go-gamco) [![Go Reference](https://pkg.go.dev/badge/github.com/jidicula/go-gamco.svg)](https://pkg.go.dev/github.com/jidicula/go-gamco)
+
 # go-gamco
 
 Practicing API wrapping with GAMCO's Closed End Funds.
