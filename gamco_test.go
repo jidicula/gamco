@@ -196,11 +196,11 @@ func TestFundMapUnmarshal(t *testing.T) {
 
 	tests := map[string]struct {
 		data []byte
-		want FundMap
+		want fundMap
 	}{
 		"two funds": {
 			data: []byte(data),
-			want: FundMap{"GUT": Fund{
+			want: fundMap{"GUT": Fund{
 				ID:                   515,
 				FundCode:             -113,
 				SecurityID:           "36240A101",
@@ -302,7 +302,7 @@ func TestFundMapUnmarshal(t *testing.T) {
 
 	for name, tt := range tests {
 		t.Run(name, func(t *testing.T) {
-			got := FundMap{}
+			got := fundMap{}
 			err := json.Unmarshal(tt.data, &got)
 			if err != nil {
 				t.Fatalf(err.Error())
