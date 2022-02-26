@@ -409,14 +409,18 @@ func TestGetFund(t *testing.T) {
 }
 
 func TestGetFundList(t *testing.T) {
-	wantLength := 14
+	wantLength := 13
 	name := "Test response list length"
 	t.Run(name, func(t *testing.T) {
 		got, err := GetCommonFundList()
+
 		if err != nil {
 			t.Fatalf(err.Error())
 		}
 		if flLen := len(got); flLen != wantLength {
+			for _, f := range got {
+				fmt.Printf("%s\n", f.FundShortName)
+			}
 			t.Errorf("%s: got list with %v Funds, want list with %v Funds", name, flLen, wantLength)
 		}
 	})
